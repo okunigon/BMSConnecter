@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>BMS Connecter</title>
+        <link rel="stylesheet" href="Connecter.css">
+    </head>
+    <body>
+        <h2>BMS Connecter</h2>
+        <div id="intro">
+            <p>複数のBMSファイルを結合します。</p>
+            <p>それぞれのファイルにおいて、前後の何もない小節は省かれます。</p>
+            <p>BMSの情報は最初のファイルを参照します。</p>
+            <p>BMSファイルは予め適当なBMSエディタで保存しておいてください。</p>
+            <p>ファイル名に数字の添え字を付けて、順番を指定してください。例）XXX_1.bms、XXX_2.bms</p>
+        </div>
+        <div id="inputFile">
+            <!-- ドラッグ&ドロップエリア -->
+            <p id="dropArea">ここにファイルをドロップしてください<br>または</p>
+    
+            <!-- 通常のinput[type=file] -->
+            <div id="inputFileWrap">
+                <input type="file" name="uploadFile" id="uploadFile" multiple>
+                <div id="btnInputFile"><span>ファイルを選択する</span></div>
+                <div id="btnChangeFile"><span>ファイルを変更する</span></div>
+            </div>
+        </div>
+        <div id="fileList">
+        </div>
+        <div id="buttons">
+            <button class="connect" type="button" onclick="connect()">Connect</button>
+        </div>
+        <script src="encoding.js"></script>
+        <script type="text/javascript" src="Connecter.js"></script>
+    </body>
+</html>
