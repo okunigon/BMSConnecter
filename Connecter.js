@@ -86,7 +86,7 @@ async function connect() {
         textFiles[i] = await loadFile(gFiles[i]);
     }
     let result = textFiles[0];
-    for(let i = 1; i < textFiles.length; i++){    
+    for(let i = 1; i < textFiles.length; i++) {    
         result = merge(result, textFiles[i]);
     }
     downloadText("result.bms", result);
@@ -113,17 +113,17 @@ function merge(fileA, fileB) {
         }
         else if(soflanFlag) {
             soflanFlag = false;
-            for(let i = 0; i < scrollDict.length; i++) {
-                result += "#SCROLL" + base36(i + 1) + " " + scrollDict[i] + "\r\n";
-            }
             for(let i = 0; i < bpmDict.length; i++) {
                 result += "#BPM" + base36(i + 1) + " " + bpmDict[i] + "\r\n";
             }
             for(let i = 0; i < stopDict.length; i++) {
                 result += "#STOP" + base36(i + 1) + " " + stopDict[i] + "\r\n";
             }
+            for(let i = 0; i < scrollDict.length; i++) {
+                result += "#SCROLL" + base36(i + 1) + " " + scrollDict[i] + "\r\n";
+            }
         }
-        if(str.search(/#[0-9]{3}[0-9A-F][0-9]:.*/) >= 0) {
+        if(str.search(/#[0-9]{3}([0-9A-F][0-9]|SC):.*/) >= 0) {
             chartFlag = true;
             let meas = Number(str.slice(1, 4));
             offset = Math.max(meas, offset);
@@ -158,7 +158,7 @@ function appendChart(strs, scrollDict, bpmDict, stopDict, offset, result) {
         else if(str.startsWith("#STOP")) {
             stopMap[str.slice(5, 7)] = Number(str.slice(8));
         }
-        else if(str.search(/#[0-9]{3}[0-9A-F][0-9]:.*/) >= 0) {
+        else if(str.search(/#[0-9]{3}([0-9A-F][0-9]|SC):.*/) >= 0) {
             flag = true;
             let meas = Number(str.slice(1, 4));
             if(startMeas == -1) {
